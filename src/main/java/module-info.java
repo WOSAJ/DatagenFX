@@ -1,8 +1,8 @@
-module discord.wosaj.datagenfx {
+open module discord.wosaj.datagenfx {
     requires javafx.controls;
     requires javafx.fxml;
+    requires com.google.gson;
 
-
-    opens discord.wosaj.datagenfx to javafx.fxml;
-    exports discord.wosaj.datagenfx;
+    exports tk.wosaj.datagenfx;
+    exports tk.wosaj.datagenfx.controllers;
 }

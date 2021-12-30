@@ -5,8 +5,8 @@ plugins {
     id 'org.beryx.jlink' version '2.24.1'
 }
 
-group 'discord.wosaj'
-version '1.0-SNAPSHOT'
+group 'tk.wosaj'
+version '0.0.1 ALPHA'
 
 repositories {
     mavenCentral()
@@ -24,8 +24,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainModule = 'discord.wosaj.datagenfx'
-    mainClass = 'discord.wosaj.datagenfx.HelloApplication'
+    mainModule = 'tk.wosaj.datagenfx'
+    mainClass = 'tk.wosaj.datagenfx.Application'
 }
 
 javafx {
@@ -37,6 +37,7 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    implementation 'com.google.code.gson:gson:2.8.9'
 }
 
 test {
