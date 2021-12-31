@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.stage.Stage?>
 
-<Stage xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Stage fx:id="NewProjectStage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tk.wosaj.datagenfx.controllers.NewProject">
     <scene>
         <Scene>
          <VBox prefHeight="300.0" prefWidth="400.0">
@@ -27,7 +27,7 @@
                   </VBox.margin>
                </Separator>
                <Label text="Project name*" />
-               <TextField />
+               <TextField fx:id="name" promptText="Enter project name" />
                <Label text="Integration folder*">
                   <VBox.margin>
                      <Insets top="10.0" />
@@ -35,8 +35,8 @@
                </Label>
                <HBox spacing="10.0">
                   <children>
-                     <TextField prefHeight="25.0" prefWidth="288.0" promptText="Enter foler path" />
-                     <Button mnemonicParsing="false" text="Browse..." />
+                     <TextField fx:id="folder" prefHeight="25.0" prefWidth="288.0" promptText="Enter foler path" />
+                     <Button mnemonicParsing="false" onAction="#browseFolder" text="Browse..." />
                   </children>
                   <VBox.margin>
                      <Insets />
@@ -47,7 +47,7 @@
                      <Insets top="10.0" />
                   </VBox.margin>
                </Label>
-               <TextField />
+               <TextField fx:id="packageEntry" promptText="Enter mod package" />
                <Separator prefWidth="200.0">
                   <VBox.margin>
                      <Insets bottom="10.0" top="20.0" />
@@ -55,7 +55,7 @@
                </Separator>
                <HBox>
                   <children>
-                     <Button alignment="CENTER_RIGHT" cancelButton="true" contentDisplay="RIGHT" mnemonicParsing="false" text="Cancel" />
+                     <Button alignment="CENTER_RIGHT" cancelButton="true" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#exit" text="Cancel" />
                      <Button defaultButton="true" mnemonicParsing="false" text="Create project">
                         <HBox.margin>
                            <Insets left="10.0" />

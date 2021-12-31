@@ -11,14 +11,14 @@ import tk.wosaj.datagenfx.version.UpdateManager;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.*;
 
 public class Application extends javafx.application.Application {
 
+    public static final ChangelogUpdateEvent changelogUpdateEvent = new ChangelogUpdateEvent();
     public static Stage stage;
     public static HostServices hostServices;
-    private static String changelog = "";
+    public static String changelog = "";
     public static final Properties properties = new Properties();
 
     static {
@@ -56,7 +56,12 @@ public class Application extends javafx.application.Application {
         Platform.runLater(() -> {
             try {
                 UpdateManager.UpdateBundle bundle = UpdateManager.checkUpdates(properties);
-                //Application.changelog = bundle.data().getChangelog();
+                var logBuilder = new StringBuilder();
+                for (String entry : bundle.data().getChangelog()) {
+                    logBuilder.append(entry).append("\n");
+                }
+                changelog = logBuilder.toString();
+                changelogUpdateEvent.fire();
                 System.out.println(bundle.status());
                 if(bundle.status() == UpdateManager.UpdateStatus.NEW_VERSION_AVAILABLE) {
                     var fxmlLoader = new FXMLLoader(Application.class.getResource("fxml/update.fxml"));
@@ -73,5 +78,29 @@ public class Application extends javafx.application.Application {
                 e.printStackTrace();
             }
         });
+    }
+
+    public static class ChangelogUpdateEvent {
+        private final List<ChangelogUpdateListener> listeners = new ArrayList<>();
+
+        public void addListener(ChangelogUpdateListener listener) {
+            listeners.add(listener);
+        }
+
+        public List<ChangelogUpdateListener> getListeners() {
+            return listeners;
+        }
+
+        public void removeListener(ChangelogUpdateListener listener) {
+            listeners.remove(listener);
+        }
+
+        protected void fire() {
+            listeners.forEach(listener -> listener.onEvent(this));
+        }
+    }
+
+    public interface ChangelogUpdateListener extends EventListener {
+        void onEvent(ChangelogUpdateEvent event);
     }
 }

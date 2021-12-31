@@ -10,7 +10,7 @@ import tk.wosaj.datagenfx.Application;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Start {
+public class Start implements Application.ChangelogUpdateListener {
 
     public static Stage newProjectStage;
 
@@ -27,12 +27,15 @@ public class Start {
 
     @FXML
     Label versionLabel;
-    @FXML
-    TextArea StartChangelog;
+    public TextArea StartChangelog;
     @FXML
     ListView<Label> recent;
     @FXML
     TreeView<String> hierarchy;
+
+    public Start() {
+        Application.changelogUpdateEvent.addListener(this);
+    }
 
     public void initialize() {
         var splitted = Application.properties.getProperty("version").split(" ");
@@ -51,5 +54,10 @@ public class Start {
 
     public void exit() {
         Application.stage.close();
+    }
+
+    @Override
+    public void onEvent(Application.ChangelogUpdateEvent event) {
+        StartChangelog.setText(Application.changelog);
     }
 }

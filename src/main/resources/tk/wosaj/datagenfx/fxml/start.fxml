@@ -67,7 +67,7 @@
                            </font>
                         </Label>
                         <Label fx:id="versionLabel" layoutX="110.0" layoutY="53.0" text="Version" />
-                        <TextArea fx:id="StartChangelog" editable="false" layoutX="405.0" layoutY="-1.0" prefHeight="448.0" prefWidth="295.0" promptText="Changelog err" wrapText="true" />
+                        <TextArea fx:id="StartChangelog" editable="false" layoutX="405.0" layoutY="27.0" prefHeight="420.0" prefWidth="295.0" promptText="Changelog err" wrapText="true" />
                         <VBox layoutX="31.0" layoutY="116.0" prefHeight="299.0" prefWidth="334.0" spacing="10.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#newProject" prefHeight="25.0" prefWidth="337.0" text="New project" />
@@ -78,6 +78,7 @@
                            </children>
                         </VBox>
                         <Separator layoutX="31.0" layoutY="100.0" prefHeight="0.0" prefWidth="334.0" />
+                        <Label layoutX="405.0" layoutY="6.0" text="Latest changes" />
                      </children>
                   </AnchorPane>
                </content></Tab>
