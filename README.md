@@ -1,5 +1,5 @@
-[![Go to WOSAJ's website](https://wosaj.github.io/font/website_lq.png)](https://main.wosaj.tk/datagenfx)
-[![Go to download page](https://wosaj.github.io/font/downloads_lq.png)](https://main.wosaj.tk/datagenfx/downloads)
+[<img src="https://wosaj.github.io/font/website.png" alt="Project page on WOSAJ's site" width="128"/>](https://main.wosaj.tk/datagenfx)
+[<img src="https://wosaj.github.io/font/downloads.png" alt="Download page on WOSAJ's website" width="128"/>](https://main.wosaj.tk/datagenfx/downloads)
 
 # DatagenFX
 **DatagenFX** is open-source data generator for Minecraft 1.13+ with support for writing your own templates of json files in XML format
