@@ -1,6 +1,7 @@
 package tk.wosaj.datagenfx;
 
 import com.google.gson.GsonBuilder;
+import tk.wosaj.datagenfx.version.UpdateData;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -197,5 +198,3 @@ public class GenerateUpdateJson {
         }
     }
 }
-
-record UpdateData(String version, String status, String date, List<String> changelog) {}

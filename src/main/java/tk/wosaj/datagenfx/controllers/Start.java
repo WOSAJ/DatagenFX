@@ -35,7 +35,9 @@ public class Start {
     TreeView<String> hierarchy;
 
     public void initialize() {
-        versionLabel.setText(Application.properties.getProperty("version"));
+        var splitted = Application.properties.getProperty("version").split(" ");
+        versionLabel.setText(
+                splitted[0].equals("RELEASE") ? splitted[1] : Application.properties.getProperty("version"));
     }
 
     public void newProject() {
