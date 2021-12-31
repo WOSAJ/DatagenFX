@@ -2,5 +2,7 @@
   "version": "0.0.1",
   "status": "ALPHA",
   "date": "2021.12.31.18",
-  "changelog": "\n\u003e test changelog\n"
+  "changelog": [
+    "\u003e abobus"
+  ]
 }

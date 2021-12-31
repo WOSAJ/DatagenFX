@@ -88,7 +88,7 @@ public class GenerateUpdateJson {
         }
 
         System.out.println();
-        String changelog = generateChangelist(scanner);
+        var changelog = generateChangelist(scanner);
         System.out.printf("Ver: %s\nVerstat: %s\nDate: %s\nChangelog: %s",
                 version,
                 status,
@@ -106,7 +106,7 @@ public class GenerateUpdateJson {
             return false;
         }
         var data = prop.getProperty("version").split(" ");
-        String version, status, date, changelist;
+        String version, status, date;
 
         if(data.length == 2) {
             version = data[1];
@@ -123,7 +123,7 @@ public class GenerateUpdateJson {
                 d.get(Calendar.DAY_OF_MONTH),
                 d.get((Calendar.HOUR_OF_DAY)));
 
-        changelist = generateChangelist(scanner);
+        var changelist = generateChangelist(scanner);
 
         System.out.printf("Ver: %s\nVerstat: %s\nDate: %s\nChangelog: %s",
                 version,
@@ -135,7 +135,7 @@ public class GenerateUpdateJson {
         return true;
     }
 
-    private static String generateChangelist(Scanner scanner) {
+    private static List<String> generateChangelist(Scanner scanner) {
         System.out.println("""
                 Changelog manager commands:
                 /removeLast - removing last entry
@@ -147,7 +147,7 @@ public class GenerateUpdateJson {
         var cl = "";
         build: do {
             System.out.print("> ");
-            cl = scanner.nextLine().trim();
+            cl = scanner.nextLine();
             switch (cl.toLowerCase()) {
                 case "/removelast":
                     if(!(changelogList.toArray().length == 0)) {
@@ -174,16 +174,14 @@ public class GenerateUpdateJson {
 
         } while (true);
 
-        var sb = new StringBuilder();
-        sb.append("\n");
-        for (String entry : changelogList) {
-            sb.append(pointer + " ").append(entry).append("\n");
-        }
-        return sb.toString();
+        var out = new ArrayList<String>();
+        changelogList.stream().map(s -> pointer + " " + s).forEach(out::add);
+        return out;
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     private static void generateJson(UpdateData data, Scanner scanner) {
+        System.out.println();
         System.out.println("Write result to file? Write Y to yes");
         if(scanner.nextLine().equalsIgnoreCase("Y")) {
             try {
@@ -200,4 +198,4 @@ public class GenerateUpdateJson {
     }
 }
 
-record UpdateData(String version, String status, String date, String changelog) {}
+record UpdateData(String version, String status, String date, List<String> changelog) {}
