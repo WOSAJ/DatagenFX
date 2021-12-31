@@ -1,11 +1,9 @@
 package tk.wosaj.datagenfx.controllers;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import tk.wosaj.datagenfx.Application;
 
@@ -27,9 +25,14 @@ public class Start {
         }
     }
 
-    public Label versionLabel;
-    public TextArea StartChangelog;
-    public ListView recent;
+    @FXML
+    Label versionLabel;
+    @FXML
+    TextArea StartChangelog;
+    @FXML
+    ListView<Label> recent;
+    @FXML
+    TreeView<String> hierarchy;
 
     public void initialize() {
         versionLabel.setText(Application.properties.getProperty("version"));
@@ -42,7 +45,6 @@ public class Start {
     }
 
     public void openProject() {
-        var file = new FileChooser().showOpenDialog(Application.stage);
     }
 
     public void exit() {
