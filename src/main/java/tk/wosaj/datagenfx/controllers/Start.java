@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import tk.wosaj.datagenfx.Application;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -19,7 +20,7 @@ public class Start implements Application.ChangelogUpdateListener {
             newProjectStage = new FXMLLoader(Application.class.getResource("fxml/new_project.fxml")).load();
             newProjectStage.setTitle(Application.properties.getProperty("newProject.title"));
             newProjectStage.getIcons().add(
-                    new Image(Objects.requireNonNull(Application.class.getResourceAsStream("icon.png"))));
+                    new Image(Objects.requireNonNull(Application.class.getResourceAsStream("images/icon.png"))));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,6 +36,7 @@ public class Start implements Application.ChangelogUpdateListener {
 
     public Start() {
         Application.changelogUpdateEvent.addListener(this);
+        NewProject.startInstance = this;
     }
 
     public void initialize() {
@@ -54,6 +56,10 @@ public class Start implements Application.ChangelogUpdateListener {
 
     public void exit() {
         Application.stage.close();
+    }
+
+    public void createNewProject(String name, String package0, File projectFile) {
+        newProjectStage.close();
     }
 
     @Override

@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import tk.wosaj.datagenfx.controllers.Start;
 import tk.wosaj.datagenfx.version.UpdateManager;
 
 import java.io.*;
@@ -41,11 +42,12 @@ public class Application extends javafx.application.Application {
         stage.setTitle(properties.getProperty("main.title"));
         stage.setScene(scene);
         stage.getIcons().add(
-                new Image(Objects.requireNonNull(getClass().getResourceAsStream("icon.png"))));
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/icon.png"))));
         var updateThread = new Thread(Application::noticeUpdate);
         updateThread.start();
-        stage.show();
+        stage.setOnCloseRequest(e -> Platform.exit());
         Application.stage = stage;
+        stage.show();
     }
 
     public static void main(String[] args) {
@@ -68,7 +70,7 @@ public class Application extends javafx.application.Application {
                     var stage = (Stage) fxmlLoader.load();
                     stage.getIcons().add(
                             new Image(Objects.requireNonNull(
-                                    Application.class.getResourceAsStream("icon.png"))));
+                                    Application.class.getResourceAsStream("images/icon.png"))));
                     stage.show();
                 }
             } catch (UnknownHostException e) {
@@ -80,6 +82,7 @@ public class Application extends javafx.application.Application {
         });
     }
 
+    @SuppressWarnings("unused")
     public static class ChangelogUpdateEvent {
         private final List<ChangelogUpdateListener> listeners = new ArrayList<>();
 
